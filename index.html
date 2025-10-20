@@ -1,239 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>AI Mastermind Certificate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Generator</title>
   <style>
-    /* ===== GENERAL PAGE STYLING ===== */
     body {
-      margin: 0;
-      padding: 2rem;
-      background: linear-gradient(120deg, #eef2f3, #d9e7ff);
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
-    .left {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      width: 300px;
-    }
-    h2 {
+      font-family: Arial, sans-serif;
       text-align: center;
-      margin-bottom: 1rem;
-      color: #222;
+      background-color: #f5f5f5;
+      padding: 20px;
     }
-    label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #333;
-      display: block;
-      margin-top: 1rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.6rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 0.3rem;
-      font-size: 0.9rem;
-    }
-    button {
-      width: 100%;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 10px;
-      margin-top: 1rem;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-    #preview { background: #1e88e5; color: white; }
-    #generate { background: #4caf50; color: white; }
-    #preview:hover { background: #1565c0; }
-    #generate:hover { background: #2e7d32; }
-
-    /* ===== CERTIFICATE DESIGN ===== */
     #certificate {
-      width: 900px;
-      height: 640px;
-      background: white;
-      border-radius: 16px;
-      border: 10px solid #1e88e5;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      position: relative;
-      text-align: center;
-      padding: 60px;
-      box-sizing: border-box;
-      background-image: radial-gradient(circle at 30% 40%, #f8faff 0%, #ffffff 80%);
-    }
-    .cert-header {
-      font-size: 1.3rem;
-      color: #1e88e5;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .cert-title {
-      margin-top: 14px;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #111;
-    }
-    .cert-line {
-      width: 120px;
-      height: 3px;
-      background: #1e88e5;
-      margin: 10px auto;
-      border-radius: 2px;
-    }
-    .cert-subtitle {
-      font-size: 1rem;
-      color: #555;
-      margin-top: 8px;
-    }
-    .cert-name {
-      margin-top: 30px;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #2b2b2b;
-      letter-spacing: 1px;
-    }
-    .cert-desc {
-      margin-top: 20px;
-      color: #444;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 1.05rem;
-      line-height: 1.5;
-    }
-    .meta {
-      position: absolute;
-      bottom: 50px;
-      left: 60px;
-      text-align: left;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    .sig {
-      position: absolute;
-      bottom: 40px;
-      right: 70px;
-      text-align: center;
-    }
-    .sig img {
-      height: 60px;
       display: none;
+      margin-top: 20px;
+      border: 4px solid #333;
+      padding: 40px;
+      background: white;
+      width: 700px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
-    .sig-title {
-      font-size: 0.8rem;
-      color: #333;
-      margin-top: 4px;
+    h1 {
+      color: #2c3e50;
+    }
+    #nameDisplay {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #1a5276;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #3498db;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #2e86c1;
     }
   </style>
 </head>
-
 <body>
-  <!-- ===== LEFT PANEL (FORM) ===== -->
-  <div class="left">
-    <h2>Generate Your Certificate</h2>
-    <label>Full Name</label>
-    <input id="name" type="text" placeholder="e.g. Rahul Sharma" />
-    <label>Email</label>
-    <input id="email" type="email" placeholder="e.g. rahul@email.com" />
-    <label>Mobile Number</label>
-    <input id="mobile" type="tel" placeholder="e.g. +91 9876543210" />
-    <label>Signature (optional)</label>
-    <input id="sigfile" type="file" accept="image/*" />
-    <button id="preview">Preview Certificate</button>
-    <button id="generate">Generate PDF</button>
-  </div>
+  <h1>Certificate Generator</h1>
+  <p>Enter your name below to generate your certificate:</p>
 
-  <!-- ===== RIGHT SIDE (CERTIFICATE PREVIEW) ===== -->
+  <input type="text" id="nameInput" placeholder="Enter your name">
+  <button class="btn" onclick="generateCertificate()">Generate Certificate</button>
+
   <div id="certificate">
-    <div class="cert-header">AI Mastermind</div>
-    <div class="cert-title">Certificate of Completion</div>
-    <div class="cert-line"></div>
-    <div class="cert-subtitle">This is to certify that</div>
-
-    <div id="certName" class="cert-name">[Your Name]</div>
-    <div class="cert-desc">
-      has successfully completed the <b>AI Mastermind 2-day Workshop</b> organized by
-      <b>Outskill</b>, covering AI Models, Agentic AI, and intelligent automation concepts.
-    </div>
-
-    <div class="meta">
-      <div id="metaEmail">Email: —</div>
-      <div id="metaMobile">Mobile: —</div>
-    </div>
-
-    <div class="sig">
-      <img id="sigImg" alt="Signature" />
-      <div class="sig-title">Prashh T<br>Co-Founder, Outskill</div>
-    </div>
+    <h2>Certificate of Participation</h2>
+    <p>This is to certify that</p>
+    <p id="nameDisplay"></p>
+    <p>has successfully participated in our event.</p>
+    <p>Organized by <strong>CSMSS College of Engineering</strong></p>
+    <p>Date: <span id="date"></span></p>
   </div>
 
-  <!-- ===== LIBRARIES ===== -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <!-- ===== SCRIPT ===== -->
   <script>
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const mobileInput = document.getElementById('mobile');
-    const sigFile = document.getElementById('sigfile');
-    const certName = document.getElementById('certName');
-    const metaEmail = document.getElementById('metaEmail');
-    const metaMobile = document.getElementById('metaMobile');
-    const sigImg = document.getElementById('sigImg');
-
-    // Preview Certificate
-    document.getElementById('preview').addEventListener('click', () => {
-      certName.textContent = nameInput.value.trim() || "[Your Name]";
-      metaEmail.textContent = "Email: " + (emailInput.value.trim() || "—");
-      metaMobile.textContent = "Mobile: " + (mobileInput.value.trim() || "—");
-    });
-
-    // Optional Signature Upload
-    sigFile.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        sigImg.src = ev.target.result;
-        sigImg.style.display = "block";
+    function generateCertificate() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (name === "") {
+        alert("Please enter your name");
+        return;
       }
-      reader.readAsDataURL(file);
-    });
 
-    // Generate PDF
-    document.getElementById('generate').addEventListener('click', async () => {
-      // Ensure latest preview
-      document.getElementById('preview').click();
-
-      const node = document.getElementById('certificate');
-      const canvas = await html2canvas(node, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
-
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: [canvas.width, canvas.height],
-      });
-      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-      const fileName = (nameInput.value || "certificate").replace(/\s+/g, "_") + "_AIMastermind.pdf";
-      pdf.save(fileName);
-    });
+      document.getElementById("certificate").style.display = "block";
+      document.getElementById("nameDisplay").textContent = name;
+      document.getElementById("date").textContent = new Date().toLocaleDateString();
+    }
   </script>
 </body>
 </html>
