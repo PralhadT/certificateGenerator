@@ -1,4 +1,3 @@
-https://pralhadt.github.io/certificateGenerator/
 # 🎓 AI Mastermind Certificate Generator
 
 A simple web-based Certificate Generator that allows users to enter their details and instantly generate a professional certificate as a downloadable PDF.
